@@ -1,0 +1,106 @@
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.nomargin {
+  margin: 0 !important;
+}
+.m_0_5_em {
+  margin: 0.5em;
+}
+.m_0_8_em {
+  margin: 0.8em;
+}
+.mb_0 {
+  margin-bottom: 0;
+}
+.mb_0_8em {
+  margin-bottom: 0.8em;
+}
+.ml_0 {
+  margin-left: 0;
+}
+.ft_0_6 {
+  font-size: 0.6em;
+}
+.ft_0_8 {
+  font-size: 0.8em;
+}
+.ft_1_3 {
+  font-size: 1.3em;
+}
+.ft_1_5 {
+  font-size: 1.5em;
+}
+.ft_1_6 {
+  font-size: 1.6em;
+}
+.ft_1_8 {
+  font-size: 1.8em;
+}
+.ft_2 {
+  font-size: 2em;
+}
+.fb {
+  font-weight: bold;
+}
+.lh_2 {
+  line-height: 2;
+}
+.white-color {
+  color: #fff;
+}
+.eee-color {
+  color: #eee;
+}
+.black-color {
+  color: rgba(0, 0, 0, 0.5);
+}
+.inherit-color {
+  color: inherit;
+}
+code {
+  padding: 0.2em;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background: #f6f6f6;
+  font-size: 0.8em;
+  color: #e83e8c;
+  word-break: break-word;
+  font-family: "YaHei Consolas Hybrid", Consolas, "Meiryo UI", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, monospace, monospace;
+}
+.flex {
+  display: flex;
+}
+.col {
+  flex: 1;
+}
+.col.col-1 {
+  flex: 1;
+}
+.col.col-2 {
+  flex: 2;
+}
+.col.col-3 {
+  flex: 3;
+}
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+.flex-end {
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.flex-column {
+  flex-direction: column;
+}
