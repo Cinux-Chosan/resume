@@ -1,3 +1,14 @@
+.iconfont(@code) {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  &::before {
+    content: @code;
+  }
+}
+
 .fl {
   float: left;
 }
@@ -14,7 +25,7 @@
   text-align: right;
 }
 
-.nomargin{
+.nomargin {
   margin: 0 !important;
 }
 
@@ -25,7 +36,7 @@
   margin: 0.8em;
 }
 
-.mb_0{
+.mb_0 {
   margin-bottom: 0;
 }
 
@@ -89,6 +100,7 @@
 code {
   padding: 0.2em;
   background: #fff;
+  position: relative;
   border-radius: 5px;
   border: 1px solid #ddd;
   background: #f6f6f6;
@@ -97,6 +109,33 @@ code {
   word-break: break-word;
   font-family: "YaHei Consolas Hybrid", Consolas, "Meiryo UI", "Malgun Gothic",
     "Segoe UI", "Trebuchet MS", Helvetica, monospace, monospace;
+  &.showTip {
+    .iconfont("\e600");
+    font-size: 0.8em;
+    display: inline-block;
+    line-height: 1em;
+    &::before,
+    &::after {
+      line-height: 1;
+      position: absolute;
+      top: 0;
+      pointer-events: none;
+    }
+    &::before {
+      transform: translateY(-100%);
+      font-size: 4em;
+      vertical-align: bottom;
+    }
+    &::after {
+      content: attr(tip);
+      font-weight: bold;
+      position: absolute;
+      top: 0;
+      transform: translateY(-4.5em);
+      display: block;
+      // color: ;
+    }
+  }
 }
 
 .flex {

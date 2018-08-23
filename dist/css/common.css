@@ -70,6 +70,7 @@
 code {
   padding: 0.2em;
   background: #fff;
+  position: relative;
   border-radius: 5px;
   border: 1px solid #ddd;
   background: #f6f6f6;
@@ -77,6 +78,39 @@ code {
   color: #e83e8c;
   word-break: break-word;
   font-family: "YaHei Consolas Hybrid", Consolas, "Meiryo UI", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, monospace, monospace;
+}
+code.showTip {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 0.8em;
+  display: inline-block;
+  line-height: 1em;
+}
+code.showTip::before {
+  content: "\e600";
+}
+code.showTip::before,
+code.showTip::after {
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+}
+code.showTip::before {
+  transform: translateY(-100%);
+  font-size: 4em;
+  vertical-align: bottom;
+}
+code.showTip::after {
+  content: attr(tip);
+  font-weight: bold;
+  position: absolute;
+  top: 0;
+  transform: translateY(-4.5em);
+  display: block;
 }
 .flex {
   display: flex;
