@@ -303,6 +303,13 @@ dl dt {
 dl dd {
   margin-left: auto;
 }
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
 .icon {
   width: 1em;
   height: 1em;
@@ -465,13 +472,6 @@ body {
   background: white;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   font: 12pt "Tahoma";
-}
-* {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-}
-a {
-  text-decoration: none;
 }
 .resume {
   height: 100%;
