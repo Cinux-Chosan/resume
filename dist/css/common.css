@@ -121,8 +121,14 @@ code.showTip::after {
 .col {
   flex: 1;
 }
+.col.col-05 {
+  flex: 0.5;
+}
 .col.col-1 {
   flex: 1;
+}
+.col.col-15 {
+  flex: 1.5;
 }
 .col.col-2 {
   flex: 2;
