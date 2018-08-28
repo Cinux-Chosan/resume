@@ -350,11 +350,20 @@ a {
 .ml_0 {
   margin-left: 0;
 }
+.ft_0_4 {
+  font-size: 0.4em;
+}
+.ft_0_5 {
+  font-size: 0.5em;
+}
 .ft_0_6 {
   font-size: 0.6em;
 }
 .ft_0_8 {
   font-size: 0.8em;
+}
+.ft_0_9 {
+  font-size: 0.9em;
 }
 .ft_1_3 {
   font-size: 1.3em;
@@ -374,6 +383,33 @@ a {
 .fb {
   font-weight: bold;
 }
+.h1em {
+  height: 1em !important;
+}
+.h1_5em {
+  height: 1.5em !important;
+}
+.h2em {
+  height: 2em !important;
+}
+.h1cm {
+  height: 1cm !important;
+}
+.h1_5cm {
+  height: 1.5cm !important;
+}
+.h2cm {
+  height: 2cm !important;
+}
+.lh_1 {
+  line-height: 1;
+}
+.lh_1_4 {
+  line-height: 1.4;
+}
+.lh_1_5 {
+  line-height: 1.5;
+}
 .lh_2 {
   line-height: 2;
 }
@@ -388,6 +424,9 @@ a {
 }
 .inherit-color {
   color: inherit;
+}
+.wathet-bg {
+  background: #e1edeb;
 }
 code {
   padding: 0.2em;
@@ -433,6 +472,7 @@ code.showTip::after {
   top: 0;
   transform: translateY(-4.5em);
   display: block;
+  min-width: 100%;
 }
 .flex {
   display: flex;
@@ -465,6 +505,18 @@ code.showTip::after {
 }
 .flex-column {
   flex-direction: column;
+}
+.w100p {
+  width: 100%;
+}
+.scale_0_5 {
+  transform: scale(0.5);
+}
+.scale_0_8 {
+  transform: scale(0.8);
+}
+.scale_0_9 {
+  transform: scale(0.9);
 }
 @page {
   size: A4;
@@ -521,6 +573,9 @@ body {
 }
 .resume__aside {
   background: steelblue;
+}
+.resume__aside .aside-item dt {
+  margin-bottom: 0.4em;
 }
 .resume__main {
   background: #d3d3d3;
@@ -581,7 +636,7 @@ body {
 }
 .time-line-tip {
   color: #eee;
-  font-size: 0.3em;
+  font-size: 0.7em;
 }
 .motto {
   border-bottom: 1px solid #fff;
@@ -599,4 +654,8 @@ body {
 }
 .water-print-container .water-print {
   margin-bottom: 1em;
+}
+.steel-seal {
+  color: #ccc;
+  text-shadow: 1px 1px 0 #fff;
 }
