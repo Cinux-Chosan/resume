@@ -1,8 +1,8 @@
-@import "normalize";
-@import "var";
-@import "myreset";
-@import "iconfont.symbol.less";
-@import "common";
+@import "../less/normalize";
+@import "../less/var";
+@import "../less/myreset";
+@import "../less/iconfont.symbol.less";
+@import "../less/common";
 
 @page {
   size: A4;
@@ -20,6 +20,7 @@ body {
   background: white;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   font: 12pt "Tahoma";
+  position: relative;
 }
 
 .resume {
@@ -44,6 +45,12 @@ body {
     }
     .my-name {
       margin: 0.4em;
+      width: 100%;
+      text-align: center;
+      .my-location {
+        position: absolute;
+        margin-left: .4em;
+      }
     }
     .icon {
       margin-right: 0.4cm;
@@ -64,9 +71,9 @@ body {
 
   &__aside {
     background: steelblue;
-    .aside-item{
-      dt{
-        margin-bottom: .4em;
+    .aside-item {
+      dt {
+        margin-bottom: 0.4em;
       }
     }
   }
@@ -77,8 +84,8 @@ body {
       padding: 0 1em;
       h2 {
         font-family: fantasy;
-        margin-top: .5em;
-        margin-bottom: .2em;
+        margin-top: 0.5em;
+        margin-bottom: 0.2em;
       }
     }
   }
@@ -145,17 +152,20 @@ body {
   }
 }
 
-.water-print-container{
+.water-print-container {
   position: absolute;
   font-size: 5em;
   width: 100%;
   height: 100%;
-  .water-print{
+  z-index: 1;
+  .water-print {
     margin-bottom: 1em;
+    opacity: .5;
+    color: #c4b7b7;
   }
 }
 
-.steel-seal{
+.steel-seal {
   color: #ccc;
   text-shadow: 1px 1px 0 #fff;
 }

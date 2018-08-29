@@ -1,0 +1,171 @@
+@import "../less/normalize";
+@import "../less/var";
+@import "../less/myreset";
+@import "../less/iconfont.symbol.less";
+@import "../less/common";
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa;
+  width: 21cm;
+  height: 29.7cm;
+  margin: 0 auto;
+  background: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  font: 12pt "Tahoma";
+  position: relative;
+}
+
+.resume {
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+  &__header {
+    width: 100%;
+    height: @headerHeight;
+    background: wheat;
+    display: flex;
+    .photo {
+      width: 2.5cm;
+      height: 2.5cm;
+      border-radius: 50%;
+    }
+    dl {
+      dd {
+        margin-left: 0;
+        line-height: 2;
+      }
+    }
+    .my-name {
+      margin: 0.4em;
+      width: 100%;
+      text-align: center;
+      .my-location {
+        position: absolute;
+        margin-left: .4em;
+      }
+    }
+    .icon {
+      margin-right: 0.4cm;
+    }
+    .header-h3 {
+      margin: 0.2cm auto;
+      text-align: center;
+    }
+    .header-best {
+      color: #4682b4;
+    }
+  }
+
+  &__body {
+    flex: 1;
+    display: flex;
+  }
+
+  &__aside {
+    background: steelblue;
+    .aside-item {
+      dt {
+        margin-bottom: 0.4em;
+      }
+    }
+  }
+  &__main {
+    background: #d3d3d3;
+    flex: 1;
+    &__section {
+      padding: 0 1em;
+      h2 {
+        font-family: fantasy;
+        margin-top: 0.5em;
+        margin-bottom: 0.2em;
+      }
+    }
+  }
+}
+
+.time-line {
+  min-height: 3cm;
+  .time-item {
+    position: relative;
+    padding-left: 1.2em;
+    color: #fff;
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+
+    &::before {
+      width: 1em;
+      height: 1em;
+      background: #fff;
+      left: 0;
+    }
+    &::after {
+      width: 0.6em;
+      height: 0.6em;
+      left: 0.2em;
+      background: burlywood;
+    }
+  }
+  .time-line-devider {
+    margin: -0.5em;
+    border-left: 0.2em solid #fff;
+    margin-left: 0.4em;
+    &.devider-1 {
+      height: 1.8cm;
+    }
+    &.devider-2 {
+      height: 2.5cm;
+    }
+    &.devider-dashed {
+      height: 0.7cm;
+      border-left-style: dotted;
+    }
+  }
+}
+
+.time-line-tip {
+  color: #eee;
+  font-size: 0.7em;
+}
+
+.motto {
+  border-bottom: 1px solid #fff;
+  padding-bottom: 0.6em;
+  span:first-child {
+    text-shadow: 2px 2px 4px #000;
+    color: #fff;
+  }
+}
+
+.water-print-container {
+  position: absolute;
+  font-size: 5em;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  .water-print {
+    margin-bottom: 1em;
+    opacity: .5;
+    color: #c4b7b7;
+  }
+}
+
+.steel-seal {
+  color: #ccc;
+  text-shadow: 1px 1px 0 #fff;
+}

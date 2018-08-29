@@ -2,14 +2,16 @@ const gulp = require("gulp");
 const less = require("gulp-less");
 
 gulp.task("html", () => {
-  gulp.src("*.html").pipe(gulp.dest("dist"));
+  gulp
+    .src(["**/*.html", "!{dist,node_modules}/**/*.html"])
+    .pipe(gulp.dest("dist"));
 });
 
 gulp.task("less", () => {
   gulp
-    .src("less/*.less")
+    .src(["**/*.less", "!{dist,node_modules}/**/*.less"])
     .pipe(less())
-    .pipe(gulp.dest("dist/css"));
+    .pipe(gulp.dest("dist"));
 });
 
 gulp.task("static", () => {
@@ -17,6 +19,7 @@ gulp.task("static", () => {
 });
 
 gulp.task("default", ["html", "less", "static"], () => {
-  gulp.watch("less/*.less", ["less"]);
-  gulp.watch("*.html", ["html"]);
+  gulp.watch(["**/*.less", "!{dist,node_modules}/**/*.less"], ["less"]);
+  gulp.watch(["**/*.html", "!{dist,node_modules}/**/*.html"], ["html"]);
 });
+
