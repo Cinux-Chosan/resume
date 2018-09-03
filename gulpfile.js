@@ -48,7 +48,7 @@ gulp.task("del", () => {
   }) 
 })
 
-gulp.task("b", ['del', 'html'])
+gulp.task("b", ['del', 'static', 'html'])
 
 function replace() {
   const { dirname, basename } = path;
