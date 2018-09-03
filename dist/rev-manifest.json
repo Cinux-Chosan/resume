@@ -1,9 +1,9 @@
 {
-  "less/common.less": "less/common-a7cb2f3065.css",
-  "less/iconfont.symbol.less": "less/iconfont-59a2aa93e7.symbol.css",
-  "less/myreset.less": "less/myreset-86b2d1b673.css",
-  "less/normalize.less": "less/normalize-953f3e3cbb.css",
-  "less/var.less": "less/var-bd3fa6d518.css",
-  "v1/style.less": "v1/style-b86a49573c.css",
-  "v2/style.less": "v2/style-3357a29e0d.css"
+  "less/common.css": "less/common-66c7564a13.css",
+  "less/iconfont.symbol.css": "less/iconfont-a32c271f01.symbol.css",
+  "less/myreset.css": "less/myreset-fd0ce94f67.css",
+  "less/normalize.css": "less/normalize-5c174470b9.css",
+  "less/var.css": "less/var-d41d8cd98f.css",
+  "v1/style.css": "v1/style-8b7575e9d2.css",
+  "v2/style.css": "v2/style-9cc8d041df.css"
 }
