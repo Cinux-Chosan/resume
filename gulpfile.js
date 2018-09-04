@@ -11,8 +11,28 @@ const rimraf = require('rimraf');
 const puppeteer = require('puppeteer');
 const glob = require('glob');
 
+gulp.task('less', buildLess);
+gulp.task('html', ['less'], buildHTML);
+gulp.task('static', buildStatic);
+gulp.task('default', ['html', 'static'], () => {
+  gulp.watch(['**/*.{html,less}', '!{dist,node_modules}/**/*.{html,less}'], ['html']);
+});
 
-gulp.task('less', () => {
+gulp.task('delDist', cb => rimraf('dist', cb))
+
+// build
+gulp.task('b', ['delDist'], () => {
+  buildStatic();
+  buildLess().on('finish', () => {
+    buildHTML().on('finish', () => {
+      createPDF();
+    });
+  });
+})
+
+gulp.task('pdf', ['html', 'static'], createPDF)
+
+function buildLess() {
   return gulp
     .src(['**/*.less', '!{dist,node_modules}/**/*.less'])
     .pipe(less())
@@ -24,38 +44,21 @@ gulp.task('less', () => {
     .pipe(gulp.dest('dist'))  // 写入处理过后的文件
     .pipe(rev.manifest())
     .pipe(gulp.dest('dist'))  // 写入 rev-manifest.json 文件
-});
+}
 
-gulp.task('html', ['less'], () => {
-  gulp
+function buildHTML() {
+  return gulp
     .src(['**/*.html', '!{dist,node_modules}/**/*.html'])
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(replace())
     .pipe(gulp.dest('dist'));
-});
+}
 
-gulp.task('static', () => {
+function buildStatic() {
   return gulp.src('static/**/*').pipe(gulp.dest('dist/static'));
-});
+}
 
-gulp.task('default', ['html', 'static'], () => {
-  // gulp.watch(['**/*.less', '!{dist,node_modules}/**/*.less'], ['less']);
-  gulp.watch(['**/*.{html,less}', '!{dist,node_modules}/**/*.{html,less}'], ['html']);
-});
-
-gulp.task('del', () => {
-  return new Promise(res => {
-    rimraf('dist', () => {
-      res();
-    });
-  })
-})
-
-gulp.task('b', ['del', 'pdf'], () => {
-
-})
-
-gulp.task('pdf', ['html', 'static'], async () => {
+async function createPDF() {
   let browser = await puppeteer.launch({
     executablePath: process.env.PUPPETEER_PATH,
   });
@@ -74,8 +77,7 @@ gulp.task('pdf', ['html', 'static'], async () => {
     }
     browser.close();
   })
-})
-
+}
 
 function replace() {
   const conf = JSON.parse(fs.readFileSync('dist/rev-manifest.json'));
