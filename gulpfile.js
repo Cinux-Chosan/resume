@@ -5,11 +5,12 @@ const uglifycss = require('gulp-uglifycss');
 const htmlmin = require('gulp-htmlmin');
 const rev = require('gulp-rev');
 const through = require('through2');
-const fs = require('fs');
-const { dirname, basename } = require('path');
 const rimraf = require('rimraf');
 const puppeteer = require('puppeteer');
 const glob = require('glob');
+const fs = require('fs');
+const { dirname, basename } = require('path');
+
 
 gulp.task('less', buildLess);
 gulp.task('html', ['less'], buildHTML);

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- 普通版本，用于基本人员（hr）看 -->
+<!-- 普通版本，用于基本人员（含 hr）看 -->
 
 <head>
   <meta charset="UTF-8">
@@ -13,13 +13,23 @@
 </head>
 
 <body>
-  <a href="./resume.pdf" download="张建军的简历v2.pdf" class="sidebar flex flex-center flex-column">
-    下 载 P D F
-  </a>
+  <ul class="sidebar flex flex-center flex-column">
+    <li class="flex flex-center flex-column">
+      <a href="./resume.pdf" download="张建军的简历v2.pdf" class="sidebar-link">
+        下 载 P D F
+      </a>
+    </li>
+    <li class="flex flex-center flex-column">
+        <a href="https://github.com/Cinux-Chosan/resume" class="sidebar-link" target="_blank">
+        简历代码
+      </a>
+    </li>
+  </ul>
+
   <!-- <div class="water-print-container flex flex-center">
     <div class="water-print mb_0 w1em steel-seal ft_2_5">示例图片</div>
   </div> -->
-  <div class="resume"> 
+  <div class="resume">
     <header class="resume__header">
       <div class="col flex col-1 flex-column flex-center">
         <!-- <img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2431804042,2244417996&fm=58" alt="" class="photo"> -->

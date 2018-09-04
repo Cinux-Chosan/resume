@@ -263,17 +263,29 @@ code.showTip::after {
   position: fixed;
   transform: translate(-110%, -50%);
   top: 50%;
-  width: 2.2em;
-  min-height: 100px;
-  padding: .5em;
-  text-align: center;
-  border-radius: 4px;
-  border: 1px dashed #000;
-  white-space: normal;
-  word-break: break-all;
-  word-wrap: break-word;
-  &:hover{
-    background: #eee;
+  padding: 0;
+  li{
+    width: 2.2em;
+    min-height: 100px;
+    text-align: center;
+    border-radius: 4px;
+    border: 1px dashed #000;
+    white-space: normal;
+    word-break: break-all;
+    word-wrap: break-word;
+    list-style-type: none;
+    margin-bottom: 10px;
+    .sidebar-link{
+      padding: .5em;
+      max-width: 100%;  // IE
+    }
+    &:hover{
+      background: #eee;
+    }
+  }
+  &_right{
+    right: 0;
+    transform: translate(110%, -50%);
   }
 }
 
