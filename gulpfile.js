@@ -6,8 +6,11 @@ const htmlmin = require('gulp-htmlmin');
 const rev = require('gulp-rev');
 const through = require('through2');
 const fs = require('fs');
-const path = require('path');
+const { dirname, basename, join } = require('path');
 const rimraf = require('rimraf');
+const puppeteer = require('puppeteer');
+const glob = require('glob');
+
 
 gulp.task("less", () => {
   return gulp
@@ -32,7 +35,7 @@ gulp.task("html", ['less'], () => {
 });
 
 gulp.task("static", () => {
-  gulp.src("static/**/*").pipe(gulp.dest("dist/static"));
+  return gulp.src("static/**/*").pipe(gulp.dest("dist/static"));
 });
 
 gulp.task("default", ["html", "static"], () => {
@@ -45,13 +48,38 @@ gulp.task("del", () => {
     rimraf('dist', () => {
       res();
     });
-  }) 
+  })
 })
 
-gulp.task("b", ['del', 'static', 'html'])
+gulp.task("b", ['del', 'pdf'], () => {
+
+})
+
+gulp.task('pdf', ['html', 'static'], async () => {
+  let browser = await puppeteer.launch({
+    executablePath: process.env.PUPPETEER_PATH,
+    // headless: false
+  });
+  let page = await browser.newPage();
+  await page.emulateMedia('print');
+  glob('dist/**/*.html', { absolute: true }, async (err, files) => {
+    let file = null;
+    while (file = files.pop()) {
+      await page.goto(file);
+      // await page.waitFor(2000000)
+      await page.pdf({
+        path: file.replace(/\.[a-z]+$/, '.pdf'),
+        printBackground: true,
+        format: 'A4',
+        preferCSSPageSize: true,
+      })
+    }
+    browser.close();
+  })
+})
+
 
 function replace() {
-  const { dirname, basename } = path;
   const conf = JSON.parse(fs.readFileSync('dist/rev-manifest.json'));
   return through.obj(function (file, enc, cb) {
     if (file.isBuffer()) {
