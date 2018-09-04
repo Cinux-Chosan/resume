@@ -58,13 +58,14 @@ gulp.task('b', ['del', 'pdf'], () => {
 gulp.task('pdf', ['html', 'static'], async () => {
   let browser = await puppeteer.launch({
     executablePath: process.env.PUPPETEER_PATH,
+    // headless: false
   });
   let page = await browser.newPage();
   await page.emulateMedia('print');
   glob('dist/**/*.html', { absolute: true }, async (err, files) => {
     let file = null;
     while (file = files.pop()) {
-      await page.goto(file);
+      await page.goto('file://' + file);
       await page.pdf({
         path: file.replace(/\.[a-z]+$/, '.pdf'),
         printBackground: true,
