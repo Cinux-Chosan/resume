@@ -6,7 +6,8 @@ module.exports = {
       ref: 'origin/master',
       repo: 'https://github.com/Cinux-Chosan/resume.git',
       path: '/zhangjianjun/resume',
-      'post-deploy': 'git pull ; ln -sf dist /zhangjianjun/statics/resume'
+      'pre-deploy-local': 'git add -A;git commit -m ..;git push',
+      'post-deploy': 'git pull ; ln -sf ./dist /zhangjianjun/statics/resume'
     }
   }
 };
