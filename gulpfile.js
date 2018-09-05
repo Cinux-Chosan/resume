@@ -11,7 +11,6 @@ const glob = require('glob');
 const fs = require('fs');
 const { dirname, basename } = require('path');
 
-
 gulp.task('less', buildLess);
 gulp.task('html', ['less'], buildHTML);
 gulp.task('static', buildStatic);
@@ -37,9 +36,7 @@ function buildLess() {
   return gulp
     .src(['**/*.less', '!{dist,node_modules}/**/*.less'])
     .pipe(less())
-    .pipe(autoprefixer({
-      browsers: ['last 2 versions'],  // https://github.com/browserslist/browserslist#queries
-    }))
+    .pipe(autoprefixer({ browsers: ['last 2 versions']}))  // https://github.com/browserslist/browserslist#queries
     .pipe(uglifycss())
     .pipe(rev())
     .pipe(gulp.dest('dist'))  // 写入处理过后的文件
@@ -62,7 +59,6 @@ function buildStatic() {
 async function createPDF() {
   let browser = await puppeteer.launch({
     executablePath: process.env.PUPPETEER_PATH,
-    // headless: false
   });
   let page = await browser.newPage();
   await page.emulateMedia('print');
