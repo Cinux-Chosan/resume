@@ -1,24 +1,25 @@
-const gulp = require('gulp');
-const less = require('gulp-less');
-const autoprefixer = require('gulp-autoprefixer');
-const uglifycss = require('gulp-uglifycss');
-const htmlmin = require('gulp-htmlmin');
-const rev = require('gulp-rev');
-const through = require('through2');
-const rimraf = require('rimraf');
-const puppeteer = require('puppeteer');
-const glob = require('glob');
-const fs = require('fs');
-const { dirname, basename } = require('path');
+const fs = require('fs')
+const glob = require('glob')
+const gulp = require('gulp')
+const rev = require('gulp-rev')
+const rimraf = require('rimraf')
+const less = require('gulp-less')
+const through = require('through2')
+const puppeteer = require('puppeteer')
+const htmlmin = require('gulp-htmlmin')
+const uglifycss = require('gulp-uglifycss')
+const { dirname, basename } = require('path')
+const autoprefixer = require('gulp-autoprefixer')
+
 
 gulp.task('less', buildLess);
 gulp.task('html', ['less'], buildHTML);
 gulp.task('static', buildStatic);
+gulp.task('pdf', ['html', 'static'], createPDF)
+gulp.task('delDist', cb => rimraf('dist', cb))
 gulp.task('default', ['html', 'static'], () => {
   gulp.watch(['**/*.{html,less}', '!{dist,node_modules}/**/*.{html,less}'], ['html']);
 });
-
-gulp.task('delDist', cb => rimraf('dist', cb))
 
 // build
 gulp.task('b', ['delDist'], () => {
@@ -30,13 +31,11 @@ gulp.task('b', ['delDist'], () => {
   });
 })
 
-gulp.task('pdf', ['html', 'static'], createPDF)
-
 function buildLess() {
   return gulp
     .src(['**/*.less', '!{dist,node_modules}/**/*.less'])
     .pipe(less())
-    .pipe(autoprefixer({ browsers: ['last 2 versions']}))  // https://github.com/browserslist/browserslist#queries
+    .pipe(autoprefixer({ browsers: ['last 2 versions'] }))  // https://github.com/browserslist/browserslist#queries
     .pipe(uglifycss())
     .pipe(rev())
     .pipe(gulp.dest('dist'))  // 写入处理过后的文件

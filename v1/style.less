@@ -11,7 +11,7 @@
   &__header {
     width: 100%;
     height: @headerHeight;
-    background: wheat;
+    background: @headerBgColor;
     display: flex;
     .photo {
       width: 2.5cm;
@@ -51,7 +51,7 @@
   }
 
   &__aside {
-    background: steelblue;
+    background: @asideBgColor;
     .aside-item {
       dt {
         margin-bottom: 0.4em;
@@ -59,7 +59,7 @@
     }
   }
   &__main {
-    background: #d3d3d3;
+    background: @mainBgColor;
     flex: 1;
     &__section {
       padding: 0 1em;

@@ -10,7 +10,7 @@
   &__header {
     width: 100%;
     height: @headerHeight; 
-    background: wheat;
+    background: @headerBgColor;
     display: flex;
     .photo {
       width: 2.5cm;
@@ -50,7 +50,7 @@
   }
 
   &__aside {
-    background: steelblue;
+    background: @asideBgColor;
     .aside-item {
       dt {
         margin-bottom: 0.4em;
@@ -58,14 +58,26 @@
     }
   }
   &__main {
-    background: #d3d3d3;
+    background: #dadada;
     flex: 1;
     &__section {
-      padding: 0 1em;
+      padding: 0;
       h2 {
         font-family: fantasy;
         margin-top: 0.5em;
         margin-bottom: 0.2em;
+      }
+      .profile-list{
+        list-style-type: none;
+        & > li {
+          padding: .5em 1em;
+          &:nth-child(even){
+            background: #eeeeee;
+          }
+          &:nth-child(odd) {
+            background: #dadada;
+          }
+        }
       }
     }
   }
@@ -124,8 +136,10 @@
 }
 
 .motto {
-  border-bottom: 1px solid #fff;
+  padding: 0 1em;
+  margin-bottom: 0;
   padding-bottom: 0.6em;
+  border-bottom: 1px solid #fff;
   span:first-child {
     text-shadow: 2px 2px 4px #000;
     color: #fff;
