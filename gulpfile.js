@@ -22,12 +22,13 @@ gulp.task('default', ['html', 'static'], () => {
 
 // build
 gulp.task('b', ['delDist'], () => {
-  buildStatic();
-  buildLess().on('finish', () => {
-    buildHTML().on('finish', () => {
-      createPDF();
+  buildStatic().on('finish', () => {
+    buildLess().on('finish', () => {
+      buildHTML().on('finish', () => {
+        createPDF();
+      });
     });
-  });
+  })
 })
 
 function buildLess() {
@@ -38,7 +39,10 @@ function buildLess() {
     .pipe(uglifycss())
     .pipe(rev())
     .pipe(gulp.dest('dist'))  // 写入处理过后的文件
-    .pipe(rev.manifest())
+    .pipe(rev.manifest('dist/rev-manifest.json', {
+      base: 'dist',
+      merge: true
+    }))
     .pipe(gulp.dest('dist'))  // 写入 rev-manifest.json 文件
 }
 
@@ -51,7 +55,11 @@ function buildHTML() {
 }
 
 function buildStatic() {
-  return gulp.src('static/**/*').pipe(gulp.dest('dist/static'));
+  return gulp.src('static/**/*')
+    .pipe(rev())
+    .pipe(gulp.dest('dist/static'))
+    .pipe(rev.manifest())
+    .pipe(gulp.dest('dist'));
 }
 
 async function createPDF() {
@@ -85,7 +93,7 @@ function replace() {
         const originBase = basename(origin);
         const fileDir = dirname(file.path);
         const originDir = dirname(origin);
-        if (conf.hasOwnProperty(origin) && revBase.endsWith('.css') && (fileDir.endsWith(originDir) || originDir.endsWith('less'))) {
+        if (conf.hasOwnProperty(origin) && (fileDir.endsWith(originDir) || originDir.endsWith('.') || originDir.endsWith('less'))) {
           file.contents = Buffer.from(file.contents.toString().replace(originBase, revBase));
         }
       }

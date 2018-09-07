@@ -1,9 +1,16 @@
 {
+  "i_want_you.png": "i_want_you-afba786ee2.png",
+  "i_want_you_converted.jpg": "i_want_you_converted-0e16945b34.jpg",
   "less/common.css": "less/common-f517b52b06.css",
   "less/iconfont.symbol.css": "less/iconfont-a32c271f01.symbol.css",
   "less/myreset.css": "less/myreset-c64f7b4167.css",
   "less/normalize.css": "less/normalize-5c174470b9.css",
   "less/var.css": "less/var-d41d8cd98f.css",
   "v1/style.css": "v1/style-cf5ea929f9.css",
-  "v2/style.css": "v2/style-b2deb86374.css"
+  "v2/style.css": "v2/style-b2deb86374.css",
+  "wechat-2.jpeg": "wechat-2-9fbde01ce5.jpeg",
+  "wechat-3.jpeg": "wechat-3-b2e6cd911c.jpeg",
+  "wechat.jpeg": "wechat-0efc8e8d77.jpeg",
+  "wechat.png": "wechat-68acfffdc0.png",
+  "wechat_converted.jpg": "wechat_converted-3afb7462ba.jpg"
 }

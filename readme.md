@@ -16,7 +16,7 @@ CSS 兼容预处理
 
 ### [Puppeteer](https://github.com/GoogleChrome/puppeteer)
 
-创建 PDF 文件（针对该功能有其它更好方案，个人更喜欢 pupeteer 来做）
+网页转 PDF 文件（针对该功能有其它更好方案，个人更喜欢 pupeteer 来做）
 
 ### [Iconfont](http://www.iconfont.cn/)
 
