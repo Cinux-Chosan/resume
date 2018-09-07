@@ -16,9 +16,7 @@ gulp.task('html', ['less'], buildHTML);
 gulp.task('static', buildStatic);
 gulp.task('pdf', ['html', 'static'], createPDF)
 gulp.task('delDist', cb => rimraf('dist', cb))
-gulp.task('default', ['html', 'static'], () => {
-  gulp.watch(['**/*.{html,less}', '!{dist,node_modules}/**/*.{html,less}'], ['html']);
-});
+gulp.task('default', ['html', 'static'], () => gulp.watch(['**/*.{html,less}', '!{dist,node_modules}/**/*.{html,less}'], ['html']));
 
 // build
 gulp.task('b', ['delDist'], () => {
@@ -32,8 +30,7 @@ gulp.task('b', ['delDist'], () => {
 })
 
 function buildLess() {
-  return gulp
-    .src(['**/*.less', '!{dist,node_modules}/**/*.less'])
+  return gulp.src(['**/*.less', '!{dist,node_modules}/**/*.less'])
     .pipe(less())
     .pipe(autoprefixer({ browsers: ['last 2 versions'] }))  // https://github.com/browserslist/browserslist#queries
     .pipe(uglifycss())
@@ -47,8 +44,7 @@ function buildLess() {
 }
 
 function buildHTML() {
-  return gulp
-    .src(['**/*.html', '!{dist,node_modules}/**/*.html'])
+  return gulp.src(['**/*.html', '!{dist,node_modules}/**/*.html'])
     .pipe(htmlmin({ collapseWhitespace: true, removeComments: true }))
     .pipe(replace())
     .pipe(gulp.dest('dist'));
@@ -69,7 +65,7 @@ async function createPDF() {
   glob('dist/**/*.html', { absolute: true }, async (err, files) => {
     let file = null;
     while (file = files.pop()) {
-      await page.goto('file://' + file);
+      await page.goto(`file://${file}`);
       await page.pdf({
         path: file.replace(/\.[a-z]+$/, '.pdf'),
         printBackground: true,
@@ -91,7 +87,7 @@ function replace() {
         const originBase = basename(origin);
         const fileDir = dirname(file.path);
         const originDir = dirname(origin);
-        if (conf.hasOwnProperty(origin) && (fileDir.endsWith(originDir) || originDir.endsWith('.') || originDir.endsWith('less'))) {
+        if (conf.hasOwnProperty(origin) && (fileDir.endsWith(originDir) || originDir.match(/(\.|less)$/))) {
           file.contents = Buffer.from(file.contents.toString().replace(originBase, revBase));
         }
       }
