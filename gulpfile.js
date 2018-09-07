@@ -11,7 +11,6 @@ const uglifycss = require('gulp-uglifycss')
 const { dirname, basename } = require('path')
 const autoprefixer = require('gulp-autoprefixer')
 
-
 gulp.task('less', buildLess);
 gulp.task('html', ['less'], buildHTML);
 gulp.task('static', buildStatic);
@@ -82,11 +81,12 @@ function replace() {
     if (file.isBuffer()) {
       for (const origin in conf) {
         const revPath = conf[origin];
-        if (conf.hasOwnProperty(origin) &&
-          dirname(file.path).endsWith(dirname(origin)) &&
-          basename(revPath).endsWith('.css')
-        ) {
-          file.contents = Buffer.from(file.contents.toString().replace(basename(origin), basename(revPath)));
+        const revBase = basename(revPath);
+        const originBase = basename(origin);
+        const fileDir = dirname(file.path);
+        const originDir = dirname(origin);
+        if (conf.hasOwnProperty(origin) && revBase.endsWith('.css') && (fileDir.endsWith(originDir) || originDir.endsWith('less'))) {
+          file.contents = Buffer.from(file.contents.toString().replace(originBase, revBase));
         }
       }
     }
