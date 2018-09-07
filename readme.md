@@ -29,6 +29,7 @@ CSS 兼容预处理
 - 代码预处理、压缩
   - 使用 `htmlmin` 消除 HTML 注释、压缩 HTML 代码
   - 使用 `uglifycss` 消除 CSS 注释、压缩 CSS 代码
+- iconfont 相关的 js 资源采用 async 异步加载并置于 body 底部，防止阻止 DOM 渲染
 - 服务器开启 `gzip` 压缩（现代浏览器基本都支持 gzip 压缩）
 - 开启 `Cache-control` 和 `Etag`，配置缓存策略
 - 公共资源分离，适合缓存和资源共享
