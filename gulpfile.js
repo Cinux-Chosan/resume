@@ -63,10 +63,8 @@ function buildStatic() {
 }
 
 async function createPDF() {
-  let browser = await puppeteer.launch({
-    executablePath: process.env.PUPPETEER_PATH,
-  });
-  let page = await browser.newPage();
+  const browser = await puppeteer.launch({ executablePath: process.env.PUPPETEER_PATH, });
+  const page = await browser.newPage();
   await page.emulateMedia('print');
   glob('dist/**/*.html', { absolute: true }, async (err, files) => {
     let file = null;
