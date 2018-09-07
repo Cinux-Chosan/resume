@@ -49,7 +49,7 @@ function buildLess() {
 function buildHTML() {
   return gulp
     .src(['**/*.html', '!{dist,node_modules}/**/*.html'])
-    .pipe(htmlmin({ collapseWhitespace: true }))
+    .pipe(htmlmin({ collapseWhitespace: true, removeComments: true }))
     .pipe(replace())
     .pipe(gulp.dest('dist'));
 }
