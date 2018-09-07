@@ -24,9 +24,8 @@ CSS 兼容预处理
 
 ## 项目优化方案
 
-- 使用 `Convert` 库对图片进行处理和压缩，处理前 235 K 处理后 34 K，节省流量 85%（未做雪碧图），再缩减其大小，从原来的 357x479 缩减到 100x134，文件体积再从 34k 缩减为 5k，整体大小降低了 98%，
-  - `magick convert i_want_you.png -sampling-factor 4:2:0 -strip -quality 85 -interlace JPEG -colorspace sRGB i_want_you_converted.jpg`
-  - `magick.exe convert i_want_you_converted.jpg -resize 28% iWantU.jpg`
+- 使用 `Convert` 库对图片进行处理和压缩，处理前 235 K 处理后 34 K，节省流量 85%（未做雪碧图），并缩减其大小，从原来的 357x479 缩减到 100x134，文件体积再从 34k 缩减为 5k，整体大小直降 230k，节约了 98% 的图像占用带宽。
+  - `magick convert i_want_you.png -sampling-factor 4:2:0 -strip -quality 85 -interlace JPEG -colorspace sRGB -resize 28% i_want_you_converted.jpg`
 - 代码预处理、压缩
   - 使用 `htmlmin` 消除 HTML 注释、压缩 HTML 代码
   - 使用 `uglifycss` 消除 CSS 注释、压缩 CSS 代码
