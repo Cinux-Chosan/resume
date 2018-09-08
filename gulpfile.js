@@ -61,6 +61,7 @@ function buildStatic() {
 async function createPDF() {
   const browser = await puppeteer.launch({ executablePath: process.env.PUPPETEER_PATH, });
   const page = await browser.newPage();
+  await page.evaluateOnNewDocument(() => window.globalTimeFormat = new Date().toLocaleString())
   await page.emulateMedia('print');
   glob('dist/**/*.html', { absolute: true }, async (err, files) => {
     let file = null;
@@ -81,6 +82,7 @@ function replace() {
   const conf = JSON.parse(fs.readFileSync('dist/rev-manifest.json'));
   return through.obj(function (file, enc, cb) {
     if (file.isBuffer()) {
+      let strFileContents = file.contents.toString().replace('{{globalTimeFormat}}', `来自 https://chosan.cn/resume/v2/resume.html ${new Date().toLocaleDateString()}`)
       for (const origin in conf) {
         const revPath = conf[origin];
         const revBase = basename(revPath);
@@ -88,7 +90,8 @@ function replace() {
         const fileDir = dirname(file.path);
         const originDir = dirname(origin);
         if (conf.hasOwnProperty(origin) && (fileDir.endsWith(originDir) || originDir.match(/(\.|less)$/))) {
-          file.contents = Buffer.from(file.contents.toString().replace(originBase, revBase));
+          strFileContents = strFileContents.replace(originBase, revBase);
+          file.contents = Buffer.from(strFileContents);
         }
       }
     }
