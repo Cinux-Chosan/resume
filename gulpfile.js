@@ -91,9 +91,9 @@ function replace() {
         const originDir = dirname(origin);
         if (conf.hasOwnProperty(origin) && (fileDir.endsWith(originDir) || originDir.match(/(\.|less)$/))) {
           strFileContents = strFileContents.replace(originBase, revBase);
-          file.contents = Buffer.from(strFileContents);
         }
       }
+      file.contents = Buffer.from(strFileContents);
     }
     this.push(file);
     return cb();
