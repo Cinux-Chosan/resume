@@ -14,8 +14,8 @@ const autoprefixer = require('gulp-autoprefixer')
 gulp.task('less', buildLess);
 gulp.task('html', ['less'], buildHTML);
 gulp.task('static', buildStatic);
-gulp.task('pdf', ['html', 'static'], createPDF)
-gulp.task('delDist', cb => rimraf('dist', cb))
+gulp.task('pdf', ['html', 'static'], createPDF);
+gulp.task('delDist', cb => rimraf('dist', cb));
 gulp.task('default', ['html', 'static'], () => gulp.watch(['**/*.{html,less}', '!{dist,node_modules}/**/*.{html,less}'], ['html']));
 
 // build
@@ -27,7 +27,7 @@ gulp.task('b', ['delDist'], () => {
       });
     });
   })
-})
+});
 
 function buildLess() {
   return gulp.src(['**/*.less', '!{dist,node_modules}/**/*.less'])
@@ -61,18 +61,18 @@ function buildStatic() {
 async function createPDF() {
   const browser = await puppeteer.launch({ executablePath: process.env.PUPPETEER_PATH, });
   const page = await browser.newPage();
-  await page.evaluateOnNewDocument(() => window.globalTimeFormat = new Date().toLocaleString())
+  await page.evaluateOnNewDocument(() => window.globalTimeFormat = new Date().toLocaleString());
   await page.emulateMedia('print');
   glob('dist/**/*.html', { absolute: true }, async (err, files) => {
     let file = null;
     while (file = files.pop()) {
       await page.goto(`file://${file}`);
       await page.pdf({
-        path: file.replace(/\.[a-z]+$/, '.pdf'),
-        printBackground: true,
         format: 'A4',
+        printBackground: true,
         preferCSSPageSize: true,
-      })
+        path: file.replace(/\.[a-z]+$/, '.pdf'),
+      });
     }
     browser.close();
   })
