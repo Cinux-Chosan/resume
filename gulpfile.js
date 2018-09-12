@@ -8,7 +8,7 @@ const through = require('through2')
 const puppeteer = require('puppeteer')
 const htmlmin = require('gulp-htmlmin')
 const uglifycss = require('gulp-uglifycss')
-const { dirname, basename } = require('path')
+const { dirname, basename, resolve } = require('path')
 const autoprefixer = require('gulp-autoprefixer')
 
 gulp.task('less', buildLess);
@@ -82,7 +82,7 @@ function replace() {
   const conf = JSON.parse(fs.readFileSync('dist/rev-manifest.json') || {});
   return through.obj(function (file, enc, cb) {
     if (file.isBuffer()) {
-      let strFileContents = file.contents.toString().replace('{{pageFooterText}}', `来自 https://chosan.cn/resume/v2/resume.html 2018/9/9`)
+      let strFileContents = replaceProp(file).contents.toString();
       for (const origin in conf) {
         const revPath = conf[origin];
         const revBase = basename(revPath);
@@ -98,4 +98,20 @@ function replace() {
     this.push(file);
     return cb();
   });
+}
+
+function replaceProp(file) {
+  try {
+    const data = require(resolve(dirname(file.path), './data'));
+    let strFileContent = file.contents.toString();
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        strFileContent = strFileContent.replace(`{{${key}}}`, data[key]);
+      }
+    }
+    file.contents = Buffer.from(strFileContent);
+  } catch (err) {
+    // console.error(err);
+  }
+  return file;
 }
