@@ -82,7 +82,7 @@ function replace() {
   const conf = JSON.parse(fs.readFileSync('dist/rev-manifest.json') || {});
   return through.obj(function (file, enc, cb) {
     if (file.isBuffer()) {
-      let strFileContents = file.contents.toString().replace('{{pageFooterText}}', `来自 https://chosan.cn/resume/v2/resume.html ${new Date().toLocaleDateString()}`)
+      let strFileContents = file.contents.toString().replace('{{pageFooterText}}', `来自 https://chosan.cn/resume/v2/resume.html 2018/9/9`)
       for (const origin in conf) {
         const revPath = conf[origin];
         const revBase = basename(revPath);
