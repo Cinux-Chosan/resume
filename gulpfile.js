@@ -51,9 +51,7 @@ gulp.task('del', () => {
   })
 })
 
-gulp.task('b', ['del', 'pdf'], () => {
-
-})
+gulp.task('b', ['del', 'pdf'], () => {})
 
 gulp.task('pdf', ['html', 'static'], async () => {
   let browser = await puppeteer.launch({
