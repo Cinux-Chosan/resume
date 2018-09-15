@@ -1,4 +1,9 @@
 
+@import "../less/normalize";
+@import "../less/var";
+@import "../less/myreset";
+@import "../less/iconfont.symbol.less";
+
 @page {
   size: A4;
   margin: 0;
@@ -14,7 +19,8 @@ body {
   margin: 0 auto;
   background: white;
   box-shadow: 6px 4px 8px rgba(0, 0, 0, 0.1);
-  font: 12pt "Tahoma";
+  font-size: 12pt;
+  font-family: "sans-serif";
   position: relative;
 }
 
@@ -37,6 +43,11 @@ html{
 .text-right {
   text-align: right;
 }
+
+.nopadding{
+  padding: 0;
+}
+
 .nomargin {
   margin: 0 !important;
 }
@@ -45,6 +56,9 @@ html{
 }
 .m_0_3_em {
   margin: 0.3em;
+}
+.m_0_4_em {
+  margin: 0.4em;
 }
 .m_0_5_em {
   margin: 0.5em;
@@ -64,6 +78,12 @@ html{
 .ml_0 {
   margin-left: 0;
 }
+.mr_3_em{
+  margin-right: 3em;
+}
+.mr_4_em{
+  margin-right: 4em;
+}
 .ft_0_4 {
   font-size: 0.4em;
 }
@@ -72,6 +92,9 @@ html{
 }
 .ft_0_6 {
   font-size: 0.6em;
+}
+.ft_0_75 {
+  font-size: 0.75em;
 }
 .ft_0_8 {
   font-size: 0.8em;
@@ -149,7 +172,7 @@ html{
   color: #eee;
 }
 .black-color {
-  color: rgba(0, 0, 0, 0.5);
+  color: #000;
 }
 .inherit-color {
   color: inherit;
@@ -204,6 +227,11 @@ code.showTip::after {
   display: block;
   min-width: 100%;
 }
+
+.bfc{
+  overflow: hidden;
+}
+
 .flex {
   display: flex;
 }
@@ -242,6 +270,23 @@ code.showTip::after {
 .flex-column {
   flex-direction: column;
 }
+
+.flex-wrap{
+  flex-wrap: wrap;
+}
+
+.mw33p{
+  min-width: 33.3333%;
+}
+
+.mw50p{
+  min-width: 50%;
+}
+
+.w50p{
+  width: 50%;
+}
+
 .w100p {
   width: 100%;
 }
@@ -263,14 +308,29 @@ code.showTip::after {
   position: fixed;
   transform: translate(-110%, -50%);
   top: 50%;
-  width: 30px;
-  min-height: 100px;
-  padding: 10px;
-  text-align: center;
-  border-radius: 4px;
-  border: 1px dashed #000;
-  &:hover{
-    background: #eee;
+  padding: 0;
+  li{
+    width: 2.2em;
+    min-height: 100px;
+    text-align: center;
+    border-radius: 4px;
+    border: 1px dashed #000;
+    white-space: normal;
+    word-break: break-all;
+    word-wrap: break-word;
+    list-style-type: none;
+    margin-bottom: 10px;
+    .sidebar-link{
+      padding: .5em;
+      max-width: 100%;  // IE
+    }
+    &:hover{
+      background: #eee;
+    }
+  }
+  &_right{
+    right: 0;
+    transform: translate(110%, -50%);
   }
 }
 
@@ -290,4 +350,11 @@ code.showTip::after {
 .steel-seal {
   color: #ccc;
   text-shadow: 1px 1px 0 #fff;
+}
+
+#page-footer{
+  position: absolute;
+  right: 1em;
+  bottom: .5em;
+  font-size: .7em;
 }

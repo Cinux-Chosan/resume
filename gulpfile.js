@@ -1,96 +1,117 @@
-const gulp = require('gulp');
-const less = require('gulp-less');
-const autoprefixer = require('gulp-autoprefixer');
-const uglifycss = require('gulp-uglifycss');
-const htmlmin = require('gulp-htmlmin');
-const rev = require('gulp-rev');
-const through = require('through2');
-const fs = require('fs');
-const { dirname, basename } = require('path');
-const rimraf = require('rimraf');
-const puppeteer = require('puppeteer');
-const glob = require('glob');
+const fs = require('fs')
+const glob = require('glob')
+const gulp = require('gulp')
+const rev = require('gulp-rev')
+const rimraf = require('rimraf')
+const less = require('gulp-less')
+const through = require('through2')
+const puppeteer = require('puppeteer')
+const htmlmin = require('gulp-htmlmin')
+const uglifycss = require('gulp-uglifycss')
+const { dirname, basename, resolve } = require('path')
+const autoprefixer = require('gulp-autoprefixer')
 
+gulp.task('less', buildLess);
+gulp.task('html', ['less'], buildHTML);
+gulp.task('static', buildStatic);
+gulp.task('pdf', ['html', 'static'], createPDF);
+gulp.task('delDist', cb => rimraf('dist', cb));
+gulp.task('default', ['html', 'static'], () => gulp.watch(['**/*.{html,less}', '!{dist,node_modules}/**/*.{html,less}'], ['html']));
 
-gulp.task('less', () => {
-  return gulp
-    .src(['**/*.less', '!{dist,node_modules}/**/*.less'])
+// build
+gulp.task('b', ['delDist'], () => {
+  buildStatic().on('finish', () => {
+    buildLess().on('finish', () => {
+      buildHTML().on('finish', () => {
+        createPDF();
+      });
+    });
+  })
+});
+
+function buildLess() {
+  return gulp.src(['**/*.less', '!{dist,node_modules}/**/*.less'])
     .pipe(less())
-    .pipe(autoprefixer({
-      browsers: ['last 2 versions'],  // https://github.com/browserslist/browserslist#queries
-    }))
+    .pipe(autoprefixer({ browsers: ['last 2 versions'] }))  // https://github.com/browserslist/browserslist#queries
     .pipe(uglifycss())
     .pipe(rev())
     .pipe(gulp.dest('dist'))  // 写入处理过后的文件
-    .pipe(rev.manifest())
+    .pipe(rev.manifest('dist/rev-manifest.json', {
+      base: 'dist',
+      merge: true
+    }))
     .pipe(gulp.dest('dist'))  // 写入 rev-manifest.json 文件
-});
+}
 
-gulp.task('html', ['less'], () => {
-  gulp
-    .src(['**/*.html', '!{dist,node_modules}/**/*.html'])
-    .pipe(htmlmin({ collapseWhitespace: true }))
+function buildHTML() {
+  return gulp.src(['**/*.html', '!{dist,node_modules}/**/*.html'])
+    .pipe(htmlmin({ collapseWhitespace: true, removeComments: true }))
     .pipe(replace())
     .pipe(gulp.dest('dist'));
-});
+}
 
-gulp.task('static', () => {
-  return gulp.src('static/**/*').pipe(gulp.dest('dist/static'));
-});
+function buildStatic() {
+  return gulp.src('static/**/*')
+    .pipe(rev())
+    .pipe(gulp.dest('dist/static'))
+    .pipe(rev.manifest())
+    .pipe(gulp.dest('dist'));
+}
 
-gulp.task('default', ['html', 'static'], () => {
-  // gulp.watch(['**/*.less', '!{dist,node_modules}/**/*.less'], ['less']);
-  gulp.watch(['**/*.{html,less}', '!{dist,node_modules}/**/*.{html,less}'], ['html']);
-});
-
-gulp.task('del', () => {
-  return new Promise(res => {
-    rimraf('dist', () => {
-      res();
-    });
-  })
-})
-
-gulp.task('b', ['del', 'pdf'], () => {})
-
-gulp.task('pdf', ['html', 'static'], async () => {
-  let browser = await puppeteer.launch({
-    executablePath: process.env.PUPPETEER_PATH,
-    // headless: false
-  });
-  let page = await browser.newPage();
+async function createPDF() {
+  const browser = await puppeteer.launch({ executablePath: process.env.PUPPETEER_PATH, });
+  const page = await browser.newPage();
+  await page.evaluateOnNewDocument(() => window.globalTimeFormat = new Date().toLocaleString());
   await page.emulateMedia('print');
   glob('dist/**/*.html', { absolute: true }, async (err, files) => {
     let file = null;
     while (file = files.pop()) {
-      await page.goto('file://' + file);
+      await page.goto(`file://${file}`);
       await page.pdf({
-        path: file.replace(/\.[a-z]+$/, '.pdf'),
-        printBackground: true,
         format: 'A4',
+        printBackground: true,
         preferCSSPageSize: true,
-      })
+        path: file.replace(/\.[a-z]+$/, '.pdf'),
+      });
     }
     browser.close();
   })
-})
-
+}
 
 function replace() {
-  const conf = JSON.parse(fs.readFileSync('dist/rev-manifest.json'));
+  const conf = JSON.parse(fs.readFileSync('dist/rev-manifest.json') || {});
   return through.obj(function (file, enc, cb) {
     if (file.isBuffer()) {
+      let strFileContents = replaceProp(file).contents.toString();
       for (const origin in conf) {
         const revPath = conf[origin];
-        if (conf.hasOwnProperty(origin) &&
-          dirname(file.path).endsWith(dirname(origin)) &&
-          basename(revPath).endsWith('.css')
-        ) {
-          file.contents = Buffer.from(file.contents.toString().replace(basename(origin), basename(revPath)));
+        const revBase = basename(revPath);
+        const originBase = basename(origin);
+        const fileDir = dirname(file.path);
+        const originDir = dirname(origin);
+        if (conf.hasOwnProperty(origin) && (fileDir.endsWith(originDir) || originDir.match(/(\.|less)$/))) {
+          strFileContents = strFileContents.replace(originBase, revBase);
         }
       }
+      file.contents = Buffer.from(strFileContents);
     }
     this.push(file);
     return cb();
   });
+}
+
+function replaceProp(file) {
+  try {
+    const data = require(resolve(dirname(file.path), './data'));
+    let strFileContent = file.contents.toString();
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        strFileContent = strFileContent.replace(`{{${key}}}`, data[key]);
+      }
+    }
+    file.contents = Buffer.from(strFileContent);
+  } catch (err) {
+    // console.error(err);
+  }
+  return file;
 }

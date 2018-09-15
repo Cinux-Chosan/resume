@@ -1,8 +1,4 @@
-@import "../less/normalize";
 @import "../less/var";
-@import "../less/myreset";
-@import "../less/iconfont.symbol.less";
-@import "../less/common";
 
 .resume {
   height: 100%;
@@ -11,11 +7,11 @@
   &__header {
     width: 100%;
     height: @headerHeight;
-    background: wheat;
+    background: @headerBgColor;
     display: flex;
     .photo {
-      width: 2.5cm;
-      height: 2.5cm;
+      width: @photoWidth;
+      height: @photoWidth;
       border-radius: 50%;
     }
     dl {
@@ -25,7 +21,7 @@
       }
     }
     .my-name {
-      margin: 0.4em;
+      margin: 0;
       width: 100%;
       text-align: center;
       .my-location {
@@ -51,7 +47,7 @@
   }
 
   &__aside {
-    background: steelblue;
+    background: @asideBgColor;
     .aside-item {
       dt {
         margin-bottom: 0.4em;
@@ -59,7 +55,7 @@
     }
   }
   &__main {
-    background: #d3d3d3;
+    background: @mainBgColor;
     flex: 1;
     &__section {
       padding: 0 1em;

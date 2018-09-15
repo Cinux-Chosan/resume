@@ -8,14 +8,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_802772_ssqgem35j5f.css">
+  <link rel="stylesheet" href="../less/common.css">
   <link rel="stylesheet" href="./style.css">
   <title>Chosan's Resume</title>
 </head>
 
 <body>
-  <a href="./resume.pdf" download="张建军的简历v1.pdf" class="sidebar flex flex-center flex-column">
-    下 载 P D F
-  </a>
+  <ul class="sidebar flex flex-center flex-column">
+    <li class="flex flex-center flex-column">
+      <a href="./resume.pdf" download="张建军的简历v1.pdf" class="sidebar-link">
+        下 载 P D F
+      </a>
+    </li>
+    <li class="flex flex-center flex-column">
+      <a href="https://github.com/Cinux-Chosan/resume" class="sidebar-link" target="_blank">
+        简历代码
+      </a>
+    </li>
+  </ul>
+
   <!-- <div class="water-print-container flex flex-center">
     <div class="water-print mb_0 w1em steel-seal ft_2_5">示例图片</div>
   </div> -->
@@ -23,7 +34,9 @@
     <header class="resume__header">
       <div class="col flex col-1 flex-column flex-center">
         <!-- <img src="https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=2431804042,2244417996&fm=58" alt="" class="photo"> -->
-        <img src="../static/wechat-3.jpeg" alt="" class="photo">
+        <a href="../static/wechat-3.jpeg" target="_blank">
+          <img src="../static/wechat-3_converted.jpg" alt="" class="photo">
+        </a>
         <p class="my-name">
           <strong>
             张建军
@@ -82,7 +95,7 @@
               <svg class="icon ft_1_5" aria-hidden="true">
                 <use xlink:href="#icon-dianziyoujian--"></use>
               </svg>
-              179817004@qq.com
+              <a href="mailto:179817004@qq.com" class="inherit-color"> 179817004@qq.com</a>
             </dd>
             <dd>
               <svg class="icon ft_1_5" aria-hidden="true">
@@ -102,7 +115,8 @@
             <div class="time-item">
               呱呱坠地
               <small class="time-line-tip">（1993.
-                <a target="_blank" href="https://baike.baidu.com/item/%E5%85%AB%E4%B8%80%E5%BB%BA%E5%86%9B%E8%8A%82?from=kg_qa" class="inherit-color">08.01）</a>
+                <a target="_blank" href="https://baike.baidu.com/item/%E5%85%AB%E4%B8%80%E5%BB%BA%E5%86%9B%E8%8A%82?from=kg_qa"
+                  class="inherit-color">08.01）</a>
               </small>
             </div>
             <div class="time-line-devider devider-dashed h2cm"></div>
@@ -121,8 +135,8 @@
             <div class="time-line-devider devider-2"></div>
             <div class="time-item">
               工作
-              <small class="time-line-tip">（至今）(
-                <a target="_blank" href="https://baike.baidu.com/item/%E7%8C%AA%E5%85%AB%E6%88%92%E7%BD%91/87811" class="inherit-color">猪八戒</a>)</small>
+              <small class="time-line-tip">（至今）(<a target="_blank" href="https://baike.baidu.com/item/%E7%8C%AA%E5%85%AB%E6%88%92%E7%BD%91/87811"
+                  class="inherit-color">猪八戒</a>)</small>
             </div>
             <div class="time-line-devider devider-dashed"></div>
           </div>
@@ -133,7 +147,7 @@
             <dl class="aside-item text-center w100p">
               <dt class="wathet-bg steel-seal">个人技能</dt>
               <dd class="black-color fb">JavaScript（ES6）</dd>
-              <dd class="black-color fb">Typescript</dd>
+              <dd class="black-color fb">TypeScript</dd>
               <dd class="black-color fb">MongoDB</dd>
               <dd class="black-color fb">Nodejs</dd>
               <dd class="black-color fb">HTML</dd>
@@ -155,7 +169,8 @@
               <dt class="wathet-bg steel-seal">其他</dt>
               <dd class="black-color fb">喜欢旅游</dd>
               <dd class="black-color fb">手动挡老司机 </dd>
-              <dd class="black-color fb">乒乓球、足球 ...</dd>
+              <dd class="black-color fb">乒乓球、足球、游泳、网球新手</dd>
+              <dd class="black-color fb">...</dd>
             </dl>
           </div>
           <div class="col col-05 flex flex-column flex-center eee-color ft_0_8 lh_2 text-center">
@@ -172,7 +187,7 @@
       <section class="resume__main col col-3 flex flex-column">
         <section class="col col-4 resume__main__section resume__main__section1">
           <p class="flex motto">
-            <span class="col col-3"> 一个杂食性程序员，无惧技术，热爱技术。</span>
+            <span class="col col-3"> 一个“杂食性”程序员，无惧技术，热爱技术。</span>
             <span class="col col-2 ft_0_6 text-right flex flex-end">—— 自言自语</span>
           </p>
           <h2 class="main-block-title">Yesterday：</h2>
@@ -186,7 +201,8 @@
                   <ul>
                     <li class="ft_0_9 lh_2 ml_0">
                       因为部门需要，学习和使用
-                      <a target="_blank" href="https://github.com/Cinux-Chosan/learning/tree/master/Ember-learning" class="showTip">
+                      <a target="_blank" href="https://github.com/Cinux-Chosan/learning/tree/master/Ember-learning"
+                        class="showTip">
                         <code class="showTip" tip="链接可点"> Ember.js</code>
                       </a>，翻译过它的文档，以及它周边的很多文档
                     </li>
@@ -227,7 +243,7 @@
             <li class="flex">
               <dl class="col nomargin">
                 <dt>
-                  <h5 class="m_0_5_em ml_0 mt_0 ft_0_6">为了偷懒：</h5>
+                  <h5 class="m_0_5_em ml_0 ft_0_6">为了偷懒：</h5>
                 </dt>
                 <dd class="ft_0_8 lh_2 ml_0">
                   <ul>
@@ -253,13 +269,13 @@
               </dl>
               <dl class="col nomargin">
                 <dt>
-                  <h5 class="m_0_5_em ml_0 mt_0 ft_0_6">因为无聊：</h5>
+                  <h5 class="m_0_5_em ml_0 ft_0_6">因为无聊：</h5>
                 </dt>
                 <dd class="ft_0_8 lh_2 ml_0">
                   <ul>
                     <li>
                       把博客升级到
-                      <a target="_blank" href="https://chosan.cn/#/post/5ac48c279b577420ed28359c">
+                      <a target="_blank" href="https://chosan.cn/jump/5b8e5c4b8a1a19b6a27ef9c3">
                         <code> https</code>
                       </a>，再到
                       <code>http2</code>，再到 pm2 自动化部署
@@ -282,7 +298,7 @@
             <li class="flex">
               <dl class="col mb_0">
                 <dt>
-                  <h5 class="m_0_5_em ml_0 mt_0 ft_0_6">项目经验：</h5>
+                  <h5 class="m_0_5_em ml_0 ft_0_6">项目经验：</h5>
                 </dt>
                 <dd class="flex ft_0_8 lh_2 ml_0">
                   <ul>
@@ -303,7 +319,7 @@
               </dl>
               <dl class="col mb_0">
                 <dt>
-                  <h5 class="m_0_5_em ml_0 mt_0 ft_0_6">在部门内部做过：</h5>
+                  <h5 class="m_0_5_em ml_0 ft_0_6">在部门内部做过：</h5>
                 </dt>
                 <dd class="flex ft_0_8 lh_2 ml_0">
                   <ul>
@@ -361,8 +377,8 @@
       </section>
     </div>
   </div>
-
-  <script src="https://at.alicdn.com/t/font_802772_inhslqf23bs.js"></script>
+  <span id="page-footer"><a href="https://chosan.cn/resume/v2/resume.html" target="_blank"> {{pageFooterText}} </a></span>
+  <script src="https://at.alicdn.com/t/font_802772_inhslqf23bs.js" async></script>
 </body>
 
 </html>
