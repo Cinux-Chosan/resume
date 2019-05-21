@@ -66,7 +66,9 @@ async function createPDF() {
   glob('dist/**/*.html', { absolute: true }, async (err, files) => {
     let file = null;
     while (file = files.pop()) {
-      await page.goto(`file://${file}`);
+      page.goto(`file://${file}`);
+      await page.waitForResponse(res => res.url().startsWith('https://at.alicdn.com') && res.status() === 200);
+      await page.waitFor(500);
       await page.pdf({
         format: 'A4',
         printBackground: true,
